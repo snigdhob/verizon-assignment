@@ -1,0 +1,80 @@
+.container {
+    div {
+        overflow: hidden;
+        border: 1px solid black;
+    }
+}
+
+#first {
+    position: relative;
+    width: 800px;
+    height: 400px;
+}
+#second {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 20px;
+    left: 40px;
+}
+#third {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 18px;
+    left: 36px;
+}
+#forth {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 16px;
+    left: 32px;
+}
+#fifth {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 14px;
+    left: 28px;
+}
+#sixth {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 12px;
+    left: 24px;
+}
+#seventh {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 10px;
+    left: 20px;
+}
+#eight {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 8px;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,13 @@
+<div class="form-group">
+    <label for="timer-limit">Enter Timer Limit</label>
+    <input type="email" class="form-control" id="timer-limit" aria-describedby="Timer Limit"
+        placeholder="Enter Timer Limit" [(ngModel)]="timerLimit">
+</div>
+<button type="button" class="btn btn-primary" (click)="onClickStartPause()">Start / Pause</button>
+<button type="button" class="btn btn-primary">Reset</button>
+
+<div class="row my-4">
+    <div class="col-12" *ngFor="let item of pauseLog">
+        Paused at {{ item }}
+    </div>
+</div>

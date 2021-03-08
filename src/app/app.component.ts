@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,31 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'assignment';
+
+  constructor(private viewContainerRef: ViewContainerRef,
+    private cfr: ComponentFactoryResolver){}
+
+  async getRoute1() {
+    this.viewContainerRef.clear();
+    const { Route1Component } = await import('./route1/route1.component');
+    this.viewContainerRef.createComponent(
+      this.cfr.resolveComponentFactory(Route1Component)
+    );
+  }
+
+  async getRoute2() {
+    this.viewContainerRef.clear();
+    const { Route2Component } = await import('./route2/route2.component');
+    this.viewContainerRef.createComponent(
+      this.cfr.resolveComponentFactory(Route2Component)
+    );
+  }
+
+  async getRoute3() {
+    this.viewContainerRef.clear();
+    const { Route3Component } = await import('./route3/route3.component');
+    this.viewContainerRef.createComponent(
+      this.cfr.resolveComponentFactory(Route3Component)
+    );
+  }
 }
