@@ -1,0 +1,16 @@
+<div class="container center mt-5">
+    <table matSort (matSortChange)="sortData($event)" class="table-bordered">
+        <tr>
+          <th *ngFor="let item of headings" [mat-sort-header]="item">{{item | titlecase}}</th>
+        </tr>
+      
+        <tr *ngFor="let item of sortedData">
+          <td>{{item.name}}</td>
+          <td>{{item.class}}</td>
+          <td>{{item.section}}</td>
+          <td>{{item.sub1}}</td>
+          <td>{{item.sub2}}</td>
+          <td>{{item.sub3}}</td>
+        </tr>
+      </table>
+</div>

@@ -1,0 +1,17 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 border">
+            <app-route4sub1 [timerCount]="timerCount"></app-route4sub1>
+        </div>
+        <div class="col-6 border">
+            <app-route4sub2 (timerEvent)="onTimerChange($event)"
+            (startPauseEvent)="onStartPauseEvent($event)"></app-route4sub2>
+        </div>
+        <div class="col-6">
+            <app-route4sub3 [startPause]="startPause"></app-route4sub3>
+        </div>
+        <div class="col-6">
+            <app-route4sub4 [startPause]="startPause"></app-route4sub4>
+        </div>
+    </div>
+</div>

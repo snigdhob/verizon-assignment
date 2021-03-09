@@ -34,4 +34,20 @@ export class AppComponent {
       this.cfr.resolveComponentFactory(Route3Component)
     );
   }
+
+  async getRoute4() {
+    this.viewContainerRef.clear();
+    const { Route4Component } = await import('./route4/route4.component');
+    this.viewContainerRef.createComponent(
+      this.cfr.resolveComponentFactory(Route4Component)
+    );
+  }
+
+  async getRoute5() {
+    this.viewContainerRef.clear();
+    const { Route5Component } = await import('./route5/route5.component');
+    this.viewContainerRef.createComponent(
+      this.cfr.resolveComponentFactory(Route5Component)
+    );
+  }
 }

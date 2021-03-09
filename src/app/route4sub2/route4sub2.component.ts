@@ -1,20 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { interval, Subject } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Subject, interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Route3Service } from '../services/route3.service';
 
 @Component({
-  selector: 'app-route3sub2',
-  templateUrl: './route3sub2.component.html',
-  styleUrls: ['./route3sub2.component.scss']
+  selector: 'app-route4sub2',
+  templateUrl: './route4sub2.component.html',
+  styleUrls: ['./route4sub2.component.scss']
 })
-export class Route3sub2Component implements OnInit, OnDestroy {
+export class Route4sub2Component implements OnInit {
 
   buttonState: number = 1;
   timerLimit: string = '';
   currentTimer: number = 0;
   notifier = new Subject();
   pauseLog: number [] = [];
+  @Output() timerEvent = new EventEmitter<number>();
+  @Output() startPauseEvent = new EventEmitter<string>();
 
   constructor(private _route3Service: Route3Service) { }
 
@@ -32,7 +34,8 @@ export class Route3sub2Component implements OnInit, OnDestroy {
         pipe(
           takeUntil(this.notifier)
         ).subscribe(x => {
-          this._route3Service.timerSubject.next(this.currentTimer);
+          // this._route3Service.timerSubject.next(this.currentTimer);
+          this.timerEvent.emit(this.currentTimer);
 
           if (this.currentTimer === 0) {
             this.buttonState = 1;
@@ -43,12 +46,14 @@ export class Route3sub2Component implements OnInit, OnDestroy {
             this.currentTimer -= 1;
           }
         });
-      this._route3Service.startPauseSubject.next('Started');
+      // this._route3Service.startPauseSubject.next('Started');
+      this.startPauseEvent.emit('Started');
     }
     else {
       this.notifier.next();
       this.pauseLog.push(this.currentTimer+1);
-      this._route3Service.startPauseSubject.next('Paused');
+      // this._route3Service.startPauseSubject.next('Paused');
+      this.startPauseEvent.emit('Paused');
       // this.notifier.complete();
     }
     this.buttonState *= -1;
@@ -59,7 +64,8 @@ export class Route3sub2Component implements OnInit, OnDestroy {
     this.timerLimit = '';
     this.currentTimer = 0;
     this.buttonState = 1;
-    this._route3Service.timerSubject.next(this.currentTimer);
+    // this._route3Service.timerSubject.next(this.currentTimer);
+    this.timerEvent.emit(this.currentTimer);
   }
 
   ngOnDestroy(){
