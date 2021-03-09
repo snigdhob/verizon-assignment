@@ -1,4 +1,5 @@
 <div class="container mt-5">
+    <h3>Input/Output</h3>
     <div class="row">
         <div class="col-6 border">
             <app-route4sub1 [timerCount]="timerCount"></app-route4sub1>
@@ -8,10 +9,10 @@
             (startPauseEvent)="onStartPauseEvent($event)"></app-route4sub2>
         </div>
         <div class="col-6">
-            <app-route4sub3 [startPause]="startPause"></app-route4sub3>
+            <app-route4sub3 [log]="startPauseList"></app-route4sub3>
         </div>
         <div class="col-6">
-            <app-route4sub4 [startPause]="startPause"></app-route4sub4>
+            <app-route4sub4 [log]="startPauseList"></app-route4sub4>
         </div>
     </div>
 </div>

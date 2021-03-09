@@ -7,7 +7,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 })
 export class Route4sub4Component implements OnInit, OnChanges {
 
-  @Input() startPause: string = '';
+  @Input() log: {event: string, time: Date}[] = [];
   start: number = 0;
   pause: number = 0;
 
@@ -17,8 +17,8 @@ export class Route4sub4Component implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges){
-    if(this.startPause){
-      if (this.startPause === 'Started') {
+    if(this.log?.length > 0){
+      if (this.log[this.log.length - 1].event === 'Started') {
         this.start += 1;
       }
       else {

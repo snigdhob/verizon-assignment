@@ -18,23 +18,26 @@ export class Route4sub2Component implements OnInit {
   @Output() timerEvent = new EventEmitter<number>();
   @Output() startPauseEvent = new EventEmitter<string>();
 
-  constructor(private _route3Service: Route3Service) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onClickStartPause() {
     if (this.buttonState === 1) {
-
       if (!this.currentTimer) {
-        this.currentTimer = Number(this.timerLimit);
+        if (this.timerLimit) {
+          this.currentTimer = Number(this.timerLimit);
+        }
+        else {
+          return;
+        }
       }
       let obs = interval(1000);
       let subscription = obs.
         pipe(
           takeUntil(this.notifier)
         ).subscribe(x => {
-          // this._route3Service.timerSubject.next(this.currentTimer);
           this.timerEvent.emit(this.currentTimer);
 
           if (this.currentTimer === 0) {
@@ -46,13 +49,11 @@ export class Route4sub2Component implements OnInit {
             this.currentTimer -= 1;
           }
         });
-      // this._route3Service.startPauseSubject.next('Started');
       this.startPauseEvent.emit('Started');
     }
     else {
       this.notifier.next();
       this.pauseLog.push(this.currentTimer+1);
-      // this._route3Service.startPauseSubject.next('Paused');
       this.startPauseEvent.emit('Paused');
       // this.notifier.complete();
     }
@@ -64,7 +65,6 @@ export class Route4sub2Component implements OnInit {
     this.timerLimit = '';
     this.currentTimer = 0;
     this.buttonState = 1;
-    // this._route3Service.timerSubject.next(this.currentTimer);
     this.timerEvent.emit(this.currentTimer);
   }
 

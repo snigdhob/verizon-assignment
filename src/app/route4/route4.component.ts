@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class Route4Component implements OnInit {
 
   timerCount: number = 0;
-  startPause: string = '';
+  startPauseList: {event: string, time: Date}[] = [];
 
   constructor() { }
 
@@ -20,7 +20,8 @@ export class Route4Component implements OnInit {
   }
 
   onStartPauseEvent(value: string){
-    this.startPause = value;
+    this.startPauseList.push({ event:value, time: new Date()});
+    this.startPauseList = this.startPauseList.slice();
   }
 
 }

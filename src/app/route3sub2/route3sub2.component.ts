@@ -14,7 +14,7 @@ export class Route3sub2Component implements OnInit, OnDestroy {
   timerLimit: string = '';
   currentTimer: number = 0;
   notifier = new Subject();
-  pauseLog: number [] = [];
+  pauseLog: number[] = [];
 
   constructor(private _route3Service: Route3Service) { }
 
@@ -23,9 +23,13 @@ export class Route3sub2Component implements OnInit, OnDestroy {
 
   onClickStartPause() {
     if (this.buttonState === 1) {
-
       if (!this.currentTimer) {
-        this.currentTimer = Number(this.timerLimit);
+        if (this.timerLimit) {
+          this.currentTimer = Number(this.timerLimit);
+        }
+        else {
+          return;
+        }
       }
       let obs = interval(1000);
       let subscription = obs.
@@ -47,14 +51,14 @@ export class Route3sub2Component implements OnInit, OnDestroy {
     }
     else {
       this.notifier.next();
-      this.pauseLog.push(this.currentTimer+1);
+      this.pauseLog.push(this.currentTimer + 1);
       this._route3Service.startPauseSubject.next('Paused');
       // this.notifier.complete();
     }
     this.buttonState *= -1;
   }
 
-  onClickReset(){
+  onClickReset() {
     this.notifier.next();
     this.timerLimit = '';
     this.currentTimer = 0;
@@ -62,7 +66,7 @@ export class Route3sub2Component implements OnInit, OnDestroy {
     this._route3Service.timerSubject.next(this.currentTimer);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.notifier.next();
     this.notifier.complete();
   }
